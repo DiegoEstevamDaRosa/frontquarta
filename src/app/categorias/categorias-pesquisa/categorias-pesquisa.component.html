@@ -15,7 +15,9 @@
   </div>
 -->
 <p-toast></p-toast>
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
 <div class="container">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
   <div class="ui-g">
 
     <div class="ui-g-12">
@@ -24,9 +26,10 @@
       </h1>
     </div>
 
+
     <div class="ui-g-12 ui-fluid">
         <label>Descrição</label>
-        <input pInputText type="text">
+        <input pInputText type="text" name="descricao" [(ngModel)]="nomeBusca">
     </div>
 
     <div class="ui-g-12">
@@ -34,6 +37,7 @@
     </div>
 
   </div>
+</form>
 
   <div class="ui-g">
       <div class="ui-g-12">
@@ -52,7 +56,7 @@
                     <td>{{cat.nome}}</td>
                     <td class="col-acoes">
                         <button pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" showDelay="1000" class="id-button-info"></button>
-                        <button pButton icon="pi pi-trash"  pTooltip="Excluir" tooltipPosition="top" showDelay="1000" class="id-button-danger" (click)="excluir(cat)"></button>
+                        <button pButton icon="pi pi-trash"  pTooltip="Excluir" tooltipPosition="top" showDelay="1000" class="id-button-danger" (click)="confirmarExclusao(cat)"></button>
                     </td>
                   </tr>
                 </ng-template>
