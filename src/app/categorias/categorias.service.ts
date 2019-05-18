@@ -9,7 +9,10 @@ export class CategoriasService {
 
   categoriasURL = 'http://localhost:8080/categorias';
   urlFiltro;
+
   constructor(private http: HttpClient) { }
+
+
 
   pesquisar(filtro: any): Promise<any> {
     if(filtro.nome){
@@ -22,14 +25,26 @@ export class CategoriasService {
   }
 
   excluir(id:number):Promise<void>{
-    return this.http.delete(this.urlFiltro+"/"+id)
+    return this.http.delete(this.categoriasURL+'/'+id)
     .toPromise()
-    .then(() => null) }
+    .then(() => null);
+  }
+
+  adicionar(categoria: Categoria): Promise<any>{
+    return this.http.post(this.categoriasURL, categoria)
+    .toPromise();
+  }
+
+  alterar(categoria: Categoria): Promise<any>{
+    return this.http.put(this.categoriasURL+'/'+categoria.id, categoria)
+    .toPromise();
+  }
+
+  buscarPorCodigo(codigo: number): Promise<Categoria> {
+    return this.http.get<Categoria>(this.categoriasURL+'/'+codigo).toPromise();
+  }
 
 
-    adicionar(categoria: Categoria): Promise<any>{
-      return this.http.post(this.categoriasURL, categoria)
-      .toPromise();
-    }
+
 
 }

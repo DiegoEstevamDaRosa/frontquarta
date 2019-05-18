@@ -1,43 +1,24 @@
-<!--
-  Responsivo Fluido
-
-  Diego Esteva Da Rosa
-<h2>
-  Bem vindo {{nome}}
-</h2>
-
-
-<div class="ui-g">
-    <div class="ui-g-12 ui-md-4 ui-lg-3">Col1</div>
-    <div class="ui-g-12 ui-md-4 ui-lg-3">Col2</div>
-    <div class="ui-g-12 ui-md-4 ui-lg-3">Col3</div>
-    <div class="ui-g-12 ui-md-4 ui-lg-3">Col4</div>
-  </div>
--->
 <p-toast></p-toast>
 <p-confirmDialog header="Confirmação" icon="pi pi-question-circle" acceptLabel="Sim" rejectLabel="Não"></p-confirmDialog>
-<div class="container">
-  <form autocomplete="off" (ngSubmit)="pesquisar()">
-  <div class="ui-g">
 
+<div class="container">
+<form autocomplete="off" (ngSubmit)="pesquisar()">
+  <div class="ui-g">
     <div class="ui-g-12">
       <h1>
         Categorias
       </h1>
     </div>
-
-
     <div class="ui-g-12 ui-fluid">
         <label>Descrição</label>
-        <input pInputText type="text" name="descricao" [(ngModel)]="nomeBusca">
+        <input pInputText type="text" name="descricao"  [(ngModel)]="nomeBusca">
     </div>
-
     <div class="ui-g-12">
         <button pButton type="submit" label="Pesquisar"></button>
     </div>
-
   </div>
 </form>
+
 
   <div class="ui-g">
       <div class="ui-g-12">
@@ -55,8 +36,8 @@
                     <td class="col-id">{{cat.id}}</td>
                     <td>{{cat.nome}}</td>
                     <td class="col-acoes">
-                        <button pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" showDelay="1000" class="id-button-info"></button>
-                        <button pButton icon="pi pi-trash"  pTooltip="Excluir" tooltipPosition="top" showDelay="1000" class="id-button-danger" (click)="confirmarExclusao(cat)"></button>
+                        <button pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top" showDelay="1000"  class="ui-button-info" [routerLink]="['/categorias',cat.id]"></button>
+                        <button pButton icon="pi pi-trash"  pTooltip="Excluir" tooltipPosition="top" showDelay="1000" class="ui-button-danger" (click)="confirmarExclusao(cat)"></button>
                     </td>
                   </tr>
                 </ng-template>
@@ -65,7 +46,7 @@
       </div>
 
       <div class="ui-g-12">
-          <a pButton label="Nova Categoria"></a>
+        <a pButton label="Nova Categoria" routerLink="/categorias/novo"></a>
       </div>
 
   </div>

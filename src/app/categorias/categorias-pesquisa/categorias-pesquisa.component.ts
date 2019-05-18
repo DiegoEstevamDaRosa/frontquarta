@@ -11,11 +11,13 @@ export class CategoriasPesquisaComponent implements OnInit {
 
   categorias = [];
 
-  nomeBusca : string;
+  nomeBusca:string;
 
-  constructor(private service:CategoriasService,
-     private msg: MessageService,
-    private confirmation: ConfirmationService) { }
+  constructor(
+    private service:CategoriasService,
+    private msg:MessageService,
+    private conf: ConfirmationService
+  ) { }
 
   pesquisar(){
     this.service.pesquisar({nome:this.nomeBusca})
@@ -23,8 +25,13 @@ export class CategoriasPesquisaComponent implements OnInit {
       this.categorias=dados;
     });
   }
+
+  ngOnInit() {
+    this.pesquisar();
+  }
+
   confirmarExclusao(categoria:any){
-    this.confirmation.confirm({
+    this.conf.confirm({
       message: 'Tem certeza que deseja excluir '+categoria.nome+'?',
       accept: () => {
         this.excluir(categoria);
@@ -32,16 +39,12 @@ export class CategoriasPesquisaComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.pesquisar();
-  }
-
   excluir(categoria: any){
     this.service.excluir(categoria.id)
     .then(()=>{
       this.pesquisar();
-      this.msg.add({severity:'success', summary:'Excluido', detail:"Excluido com sucesso!"});
-    }
-    )};
+      this.msg.add({severity:'success', summary:'Exclusão', detail:'Categoria '+categoria.nome+' excluída'});
+    });
+  }
 
 }
